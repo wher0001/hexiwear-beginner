@@ -5,6 +5,8 @@ function mainController($scope) {
 	var main = this;
 
 	main.buttonClicked = function() {
+                main.Name = ''; // Store name
+                main.Id = ''; // Store id
 		if (isBluetoothEnabled()) {
 			let options = {	
 				filters: [{name: 'HEXIWEAR'}],	
