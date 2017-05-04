@@ -22,7 +22,12 @@ function mainController($scope) {
 
                 	return device.gatt.connect();
             	})
-            	.then(function(server) {
+            	.then(function(data) {
+            		// Got the value. Let's use it in our application.
+            	    main.Manufacturer = dataToString(data);
+            	    $scope.$apply();
+				})
+		.then(function(server) {
             		// Device has connected.
             		// Get the service we are looking for to get data from.
             		return server.getPrimaryService('0000180a-0000-1000-8000-00805f9b34fb');
@@ -37,11 +42,6 @@ function mainController($scope) {
              	   	// Read the value we want.
              	   	return c1.readValue();
             	})
-            	.then(function(data) {
-            		// Got the value. Let's use it in our application.
-            	    main.Manufacturer = dataToString(data);
-            	    $scope.$apply();
-				})
             	.catch(function(error) {
                 	console.log('Argh! ' + error);
             	});
